@@ -2,18 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
-//Written with GPT assistance
-
+//with AI assistance
 public class RTSNavCommander : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Camera mainCamera;
 
-    private List<NavMeshAgent> selectedAgents = new List<NavMeshAgent>();
-    private Dictionary<NavMeshAgent, Vector3> queuedMoves = new Dictionary<NavMeshAgent, Vector3>();
+    private NavMeshAgent currentlySelectedAgent = null;
 
-    private bool awaitingDestination = false;
-    private Vector3 cachedDestination;
+    // Stores cached moves per unit
+    private Dictionary<NavMeshAgent, Vector3> queuedMoves = new Dictionary<NavMeshAgent, Vector3>();
 
     void Update()
     {
@@ -23,20 +21,20 @@ public class RTSNavCommander : MonoBehaviour
     }
 
     // ===============================
-    // 1️⃣ Selection (Keys 1–5)
+    // 1️⃣ Selection (Single Active Unit)
     // ===============================
     void HandleSelection()
     {
         if (Keyboard.current == null) return;
 
-        if (Keyboard.current.digit1Key.wasPressedThisFrame) TrySelectCharacter(1);
-        if (Keyboard.current.digit2Key.wasPressedThisFrame) TrySelectCharacter(2);
-        if (Keyboard.current.digit3Key.wasPressedThisFrame) TrySelectCharacter(3);
-        if (Keyboard.current.digit4Key.wasPressedThisFrame) TrySelectCharacter(4);
-        if (Keyboard.current.digit5Key.wasPressedThisFrame) TrySelectCharacter(5);
+        if (Keyboard.current.digit1Key.wasPressedThisFrame) SelectCharacter(1);
+        if (Keyboard.current.digit2Key.wasPressedThisFrame) SelectCharacter(2);
+        if (Keyboard.current.digit3Key.wasPressedThisFrame) SelectCharacter(3);
+        if (Keyboard.current.digit4Key.wasPressedThisFrame) SelectCharacter(4);
+        if (Keyboard.current.digit5Key.wasPressedThisFrame) SelectCharacter(5);
     }
 
-    void TrySelectCharacter(int index)
+    void SelectCharacter(int index)
     {
         GameObject target = GameObject.Find("Character" + index);
         if (target == null) return;
@@ -44,21 +42,16 @@ public class RTSNavCommander : MonoBehaviour
         NavMeshAgent agent = target.GetComponent<NavMeshAgent>();
         if (agent == null) return;
 
-        if (!selectedAgents.Contains(agent))
-        {
-            selectedAgents.Add(agent);
-            Debug.Log("Selected: " + target.name);
-        }
-
-        awaitingDestination = true;
+        currentlySelectedAgent = agent;
+        Debug.Log("Selected: " + agent.name);
     }
 
     // ===============================
-    // 2️⃣ Raycast + NavMesh Validation
+    // 2️⃣ Raycast + Cache Move
     // ===============================
     void HandleRaycast()
     {
-        if (!awaitingDestination || selectedAgents.Count == 0) return;
+        if (currentlySelectedAgent == null) return;
         if (Mouse.current == null) return;
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
@@ -69,37 +62,60 @@ public class RTSNavCommander : MonoBehaviour
             {
                 if (NavMesh.SamplePosition(hit.point, out NavMeshHit navHit, 2f, NavMesh.AllAreas))
                 {
-                    cachedDestination = navHit.position;
-                    QueueMoves(cachedDestination);
-                    Debug.Log("Destination Cached");
+                    // Rounded position (whole integers)
+                    Vector3 roundedPosition = new Vector3(
+                        Mathf.Round(navHit.position.x),
+                        navHit.position.y, // preserve height
+                        Mathf.Round(navHit.position.z)
+                    );
+
+                    TryCacheMove(currentlySelectedAgent, roundedPosition);
                 }
             }
         }
     }
 
     // ===============================
-    // 3️⃣ Queue Valid Paths
+    // 3️⃣ Cache Move (No Duplicates)
     // ===============================
-    void QueueMoves(Vector3 destination)
+    void TryCacheMove(NavMeshAgent agent, Vector3 destination)
     {
-        queuedMoves.Clear();
+        if (agent == null) return;
 
-        foreach (NavMeshAgent agent in selectedAgents)
+        // 🔵 Prevent two agents from reserving same position
+        if (IsLocationAlreadyQueued(destination))
         {
-            if (agent == null) continue;
+            Debug.Log("Location already reserved by another unit.");
+            return;
+        }
 
-            NavMeshPath path = new NavMeshPath();
+        NavMeshPath path = new NavMeshPath();
 
-            if (agent.CalculatePath(destination, path) &&
-                path.status == NavMeshPathStatus.PathComplete)
-            {
-                queuedMoves[agent] = destination;
-            }
+        if (agent.CalculatePath(destination, path) &&
+            path.status == NavMeshPathStatus.PathComplete)
+        {
+            queuedMoves[agent] = destination;
+            Debug.Log($"Move cached for {agent.name}");
+        }
+        else
+        {
+            Debug.Log($"Destination unreachable for {agent.name}");
         }
     }
 
+    // 🔵 Duplicate Prevention Helper
+    bool IsLocationAlreadyQueued(Vector3 position)
+    {
+        foreach (Vector3 queuedPosition in queuedMoves.Values)
+        {
+            if (queuedPosition == position)
+                return true;
+        }
+        return false;
+    }
+
     // ===============================
-    // 4️⃣ Execute All on 'M'
+    // 4️⃣ Execute All Cached Moves
     // ===============================
     void HandleMoveExecution()
     {
@@ -109,22 +125,22 @@ public class RTSNavCommander : MonoBehaviour
         {
             foreach (var move in queuedMoves)
             {
-                move.Key.SetDestination(move.Value);
+                if (move.Key != null)
+                    move.Key.SetDestination(move.Value);
             }
 
-            ClearSelection();
+            ClearAll();
         }
     }
 
     // ===============================
-    // 5️⃣ Clear Selection
+    // 5️⃣ Clear System
     // ===============================
-    void ClearSelection()
+    void ClearAll()
     {
-        selectedAgents.Clear();
+        currentlySelectedAgent = null;
         queuedMoves.Clear();
-        awaitingDestination = false;
 
-        Debug.Log("Selection Cleared");
+        Debug.Log("All moves executed. System reset.");
     }
 }
