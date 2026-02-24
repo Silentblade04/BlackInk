@@ -3,6 +3,18 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private TMPro.TextMeshProUGUI log;
+    [SerializeField] private Camera mainCamera;
+
+    private void Start()
+    {
+        mainCamera = Camera.main;
+    }
+
+    public void AttackMode()
+    {
+
+    }
+    
     public void attack(GameObject target)
     {
         if (target == null)
