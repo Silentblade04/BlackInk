@@ -33,7 +33,6 @@ public class PlayerAttack : MonoBehaviour
     private void Awake()
     {
         attackmode = false;
-        mainCamera = GetComponent<Camera>();
     }
     private void Update()
     {
