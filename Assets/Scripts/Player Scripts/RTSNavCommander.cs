@@ -8,21 +8,28 @@ public class RTSNavCommander : MonoBehaviour
     [Header("References")]
     [SerializeField] private Camera mainCamera;
 
-    // New fields for tile generation
-    private Dictionary<NavMeshAgent, GameObject> destinationTiles = new Dictionary<NavMeshAgent, GameObject>(); // Destination markers
+    // Destination markers
+    private Dictionary<NavMeshAgent, GameObject> destinationTiles = new Dictionary<NavMeshAgent, GameObject>();
 
     private NavMeshAgent currentlySelectedAgent = null;
+
+    // Movement state
     private bool MovingPrimed = false;
 
+    // Cached moves
     private Dictionary<NavMeshAgent, Vector3> queuedMoves = new Dictionary<NavMeshAgent, Vector3>();
+
 
     void Update()
     {
+        if (Keyboard.current == null) return;
+
+        // Prime movement with keyboard
         if (Keyboard.current.mKey.wasPressedThisFrame && queuedMoves.Count == 0 && MovingPrimed == false)
         {
-            MovingPrimed = true;
-            Debug.Log("Moving Primed.");
+            PrimeMovement();
         }
+
         if (MovingPrimed)
         {
             HandleSelection();
@@ -31,10 +38,28 @@ public class RTSNavCommander : MonoBehaviour
         }
     }
 
+
+    // ===============================
+    // UI ACCESS
+    // ===============================
+
+    // Called by UI Button
+    public void PrimeMovement()
+    {
+        if (queuedMoves.Count == 0 && MovingPrimed == false)
+        {
+            MovingPrimed = true;
+            Debug.Log("Moving Primed.");
+        }
+    }
+
+
+    // ===============================
+    // SELECTION
+    // ===============================
+
     void HandleSelection()
     {
-        if (Keyboard.current == null) return;
-
         if (Keyboard.current.digit1Key.wasPressedThisFrame) SelectCharacter(1);
         if (Keyboard.current.digit2Key.wasPressedThisFrame) SelectCharacter(2);
         if (Keyboard.current.digit3Key.wasPressedThisFrame) SelectCharacter(3);
@@ -53,6 +78,11 @@ public class RTSNavCommander : MonoBehaviour
         currentlySelectedAgent = agent;
         Debug.Log("Selected: " + agent.name);
     }
+
+
+    // ===============================
+    // DESTINATION RAYCAST
+    // ===============================
 
     void HandleRaycast()
     {
@@ -79,6 +109,11 @@ public class RTSNavCommander : MonoBehaviour
         }
     }
 
+
+    // ===============================
+    // CACHE MOVES
+    // ===============================
+
     void TryCacheMove(NavMeshAgent agent, Vector3 destination)
     {
         if (agent == null) return;
@@ -94,7 +129,8 @@ public class RTSNavCommander : MonoBehaviour
         if (agent.CalculatePath(destination, path) && path.status == NavMeshPathStatus.PathComplete)
         {
             queuedMoves[agent] = destination;
-            UpdateDestinationTile(agent, destination); // Update the destination tile
+            UpdateDestinationTile(agent, destination);
+
             Debug.Log($"Move cached for {agent.name}");
         }
         else
@@ -102,6 +138,7 @@ public class RTSNavCommander : MonoBehaviour
             Debug.Log($"Destination unreachable for {agent.name}");
         }
     }
+
 
     bool IsLocationAlreadyQueued(Vector3 position)
     {
@@ -113,29 +150,36 @@ public class RTSNavCommander : MonoBehaviour
         return false;
     }
 
-    // Update or create the destination tile for the specific agent
-    private void UpdateDestinationTile(NavMeshAgent agent, Vector3 destination)
+
+    // ===============================
+    // DESTINATION TILE VISUALS
+    // ===============================
+
+    void UpdateDestinationTile(NavMeshAgent agent, Vector3 destination)
     {
         if (destinationTiles.ContainsKey(agent))
         {
-            // Move existing tile to the new destination
             destinationTiles[agent].transform.position = destination;
         }
         else
         {
-            // Create the tile if it doesn't exist
             GameObject tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
             tile.transform.position = destination;
             tile.transform.localScale = new Vector3(1, 0.1f, 1);
-            tile.GetComponent<Renderer>().material.color = Color.blue; // Color for visibility
-            destinationTiles[agent] = tile; // Store the tile in the dictionary
+
+            tile.GetComponent<Renderer>().material.color = Color.blue;
+
+            destinationTiles[agent] = tile;
         }
     }
 
+
+    // ===============================
+    // EXECUTE MOVES
+    // ===============================
+
     void HandleMoveExecution()
     {
-        if (Keyboard.current == null) return;
-
         if (Keyboard.current.mKey.wasPressedThisFrame && queuedMoves.Count > 0)
         {
             foreach (var move in queuedMoves)
@@ -144,24 +188,31 @@ public class RTSNavCommander : MonoBehaviour
                     move.Key.SetDestination(move.Value);
             }
 
-            ClearTiles(); // Clear the tiles when executing moves
+            ClearTiles();
             ClearAll();
         }
     }
 
-    private void ClearTiles()
+
+    // ===============================
+    // CLEANUP
+    // ===============================
+
+    void ClearTiles()
     {
         foreach (var tile in destinationTiles.Values)
         {
             if (tile != null) Destroy(tile);
         }
-        destinationTiles.Clear(); // Clear the dictionary after destroying tiles
+
+        destinationTiles.Clear();
     }
 
     void ClearAll()
     {
         currentlySelectedAgent = null;
         queuedMoves.Clear();
+
         Debug.Log("All moves executed. System reset.");
     }
 }
