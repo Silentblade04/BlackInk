@@ -46,6 +46,7 @@ public class RTSNavCommander : MonoBehaviour
     // Called by UI Button
     public void PrimeMovement()
     {
+        Debug.Log("Moving Not Primed.");
         if (queuedMoves.Count == 0 && MovingPrimed == false)
         {
             MovingPrimed = true;
