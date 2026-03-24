@@ -15,6 +15,8 @@ public class RTSNavCommander : MonoBehaviour
 
     public NavMeshAgent currentlySelectedAgent = null;
 
+    public int maxMoveDistance = 15;
+
     // Movement state
     private bool MovingPrimed = false;
 
@@ -38,6 +40,7 @@ public class RTSNavCommander : MonoBehaviour
         {
             moveButton.gameObject.SetActive(false);
         }
+
         if (Keyboard.current == null) return;
 
         // Prime movement with keyboard
@@ -45,6 +48,7 @@ public class RTSNavCommander : MonoBehaviour
         {
             PrimeMovement();
         }
+
         if (MovingPrimed)
         {
             //HandleSelection();
@@ -52,7 +56,6 @@ public class RTSNavCommander : MonoBehaviour
             HandleMoveExecution();
         }
     }
-
 
     // ===============================
     // UI ACCESS
@@ -62,6 +65,7 @@ public class RTSNavCommander : MonoBehaviour
     public void PrimeMovement()
     {
         Debug.Log("Moving Not Primed.");
+
         if (queuedMoves.Count == 0 && MovingPrimed == false)
         {
             MovingPrimed = true;
@@ -73,7 +77,6 @@ public class RTSNavCommander : MonoBehaviour
             Debug.Log("Moving Deprimed.");
         }
     }
-
 
     // ===============================
     // SELECTION
@@ -104,6 +107,7 @@ public class RTSNavCommander : MonoBehaviour
     // ===============================
     // DESTINATION RAYCAST
     // ===============================
+
     /*
     void HandleRaycast()
     {
@@ -135,17 +139,93 @@ public class RTSNavCommander : MonoBehaviour
         }
     }
     */
+
     public void HandleNavMeshRay(RaycastHit hit)
     {
-            if (NavMesh.SamplePosition(hit.point, out NavMeshHit navHit, 2f, NavMesh.AllAreas))
+        if (currentlySelectedAgent == null) return;
+
+        if (NavMesh.SamplePosition(hit.point, out NavMeshHit navHit, 2f, NavMesh.AllAreas))
+        {
+            Vector3 roundedPosition = new Vector3(
+                Mathf.Round(navHit.position.x),
+                navHit.position.y,
+                Mathf.Round(navHit.position.z)
+            );
+
+            NavMeshPath path = new NavMeshPath();
+
+            // Calculate full path
+            if (!currentlySelectedAgent.CalculatePath(roundedPosition, path) || path.status != NavMeshPathStatus.PathComplete)
             {
-                Vector3 roundedPosition = new Vector3(
-                    Mathf.Round(navHit.position.x),
-                    navHit.position.y,
-                    Mathf.Round(navHit.position.z)
-                    );
-                TryCacheMove(currentlySelectedAgent, roundedPosition);
+                Debug.Log("Invalid path.");
+                return;
             }
+
+            float pathLength = GetPathLength(path);
+
+            // Clamp to maxMoveDistance along path
+            if (pathLength > maxMoveDistance)
+            {
+                Vector3 clampedPosition = GetPointAlongPath(path, maxMoveDistance);
+
+                if (NavMesh.SamplePosition(clampedPosition, out NavMeshHit clampedHit, 1f, NavMesh.AllAreas))
+                {
+                    roundedPosition = new Vector3(
+                        Mathf.Round(clampedHit.position.x),
+                        clampedHit.position.y,
+                        Mathf.Round(clampedHit.position.z)
+                    );
+                }
+                else
+                {
+                    Debug.Log("Failed to clamp to NavMesh.");
+                    return;
+                }
+            }
+
+            TryCacheMove(currentlySelectedAgent, roundedPosition);
+        }
+    }
+
+    // ===============================
+    // PATH UTILITIES (NEW)
+    // ===============================
+
+    float GetPathLength(NavMeshPath path)
+    {
+        float length = 0f;
+
+        for (int i = 1; i < path.corners.Length; i++)
+        {
+            length += Vector3.Distance(path.corners[i - 1], path.corners[i]);
+        }
+
+        return length;
+    }
+
+    Vector3 GetPointAlongPath(NavMeshPath path, float maxDistance)
+    {
+        float distanceSoFar = 0f;
+
+        for (int i = 1; i < path.corners.Length; i++)
+        {
+            Vector3 start = path.corners[i - 1];
+            Vector3 end = path.corners[i];
+
+            float segmentLength = Vector3.Distance(start, end);
+
+            if (distanceSoFar + segmentLength >= maxDistance)
+            {
+                float remaining = maxDistance - distanceSoFar;
+                Vector3 direction = (end - start).normalized;
+
+                return start + direction * remaining;
+            }
+
+            distanceSoFar += segmentLength;
+        }
+
+        return path.corners[path.corners.Length - 1];
     }
 
     // ===============================
@@ -177,7 +257,6 @@ public class RTSNavCommander : MonoBehaviour
         }
     }
 
-
     bool IsLocationAlreadyQueued(Vector3 position)
     {
         foreach (Vector3 queuedPosition in queuedMoves.Values)
@@ -187,7 +266,6 @@ public class RTSNavCommander : MonoBehaviour
         }
         return false;
     }
-
 
     // ===============================
     // DESTINATION TILE VISUALS
@@ -211,7 +289,6 @@ public class RTSNavCommander : MonoBehaviour
         }
     }
 
-
     // ===============================
     // EXECUTE MOVES
     // ===============================
@@ -220,9 +297,9 @@ public class RTSNavCommander : MonoBehaviour
     {
         MoveExecute = true;
     }
+
     void HandleMoveExecution()
     {
-        //Keyboard.current.mKey.wasPressedThisFrame
         if (MoveExecute == true && queuedMoves.Count > 0)
         {
             foreach (var move in queuedMoves)
@@ -230,12 +307,12 @@ public class RTSNavCommander : MonoBehaviour
                 if (move.Key != null)
                     move.Key.SetDestination(move.Value);
             }
+
             MoveExecute = false;
             ClearTiles();
             ClearAll();
         }
     }
-
 
     // ===============================
     // CLEANUP
