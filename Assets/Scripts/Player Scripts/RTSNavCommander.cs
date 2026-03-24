@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class RTSNavCommander : MonoBehaviour
 {
@@ -11,17 +13,31 @@ public class RTSNavCommander : MonoBehaviour
     // Destination markers
     private Dictionary<NavMeshAgent, GameObject> destinationTiles = new Dictionary<NavMeshAgent, GameObject>();
 
-    private NavMeshAgent currentlySelectedAgent = null;
+    public NavMeshAgent currentlySelectedAgent = null;
 
     // Movement state
     private bool MovingPrimed = false;
 
+    // Movement Execution variable
+    private bool MoveExecute = false;
+
     // Cached moves
     private Dictionary<NavMeshAgent, Vector3> queuedMoves = new Dictionary<NavMeshAgent, Vector3>();
 
+    //move buttons
+    [SerializeField] private Button moveButton;
 
     void Update()
     {
+        //Hiding attack UI
+        if (MovingPrimed == true)
+        {
+            moveButton.gameObject.SetActive(true);
+        }
+        else if (MovingPrimed == false)
+        {
+            moveButton.gameObject.SetActive(false);
+        }
         if (Keyboard.current == null) return;
 
         // Prime movement with keyboard
@@ -29,11 +45,10 @@ public class RTSNavCommander : MonoBehaviour
         {
             PrimeMovement();
         }
-
         if (MovingPrimed)
         {
-            HandleSelection();
-            HandleRaycast();
+            //HandleSelection();
+            //HandleRaycast();
             HandleMoveExecution();
         }
     }
@@ -51,6 +66,11 @@ public class RTSNavCommander : MonoBehaviour
             MovingPrimed = true;
             Debug.Log("Moving Primed.");
         }
+        else if (queuedMoves.Count == 0 && MovingPrimed == true)
+        {
+            MovingPrimed = false;
+            Debug.Log("Moving Deprimed.");
+        }
     }
 
 
@@ -58,32 +78,32 @@ public class RTSNavCommander : MonoBehaviour
     // SELECTION
     // ===============================
 
-    void HandleSelection()
-    {
-        if (Keyboard.current.digit1Key.wasPressedThisFrame) SelectCharacter(1);
-        if (Keyboard.current.digit2Key.wasPressedThisFrame) SelectCharacter(2);
-        if (Keyboard.current.digit3Key.wasPressedThisFrame) SelectCharacter(3);
-        if (Keyboard.current.digit4Key.wasPressedThisFrame) SelectCharacter(4);
-        if (Keyboard.current.digit5Key.wasPressedThisFrame) SelectCharacter(5);
-    }
+    /* void HandleSelection()
+     {
+         if (Keyboard.current.digit1Key.wasPressedThisFrame) SelectCharacter(1);
+         if (Keyboard.current.digit2Key.wasPressedThisFrame) SelectCharacter(2);
+         if (Keyboard.current.digit3Key.wasPressedThisFrame) SelectCharacter(3);
+         if (Keyboard.current.digit4Key.wasPressedThisFrame) SelectCharacter(4);
+         if (Keyboard.current.digit5Key.wasPressedThisFrame) SelectCharacter(5);
+     }
 
-    void SelectCharacter(int index)
-    {
-        GameObject target = GameObject.Find("Character" + index);
-        if (target == null) return;
+     void SelectCharacter(int index)
+     {
+         GameObject target = GameObject.Find("Character" + index);
+         if (target == null) return;
 
-        NavMeshAgent agent = target.GetComponent<NavMeshAgent>();
-        if (agent == null) return;
+         NavMeshAgent agent = target.GetComponent<NavMeshAgent>();
+         if (agent == null) return;
 
-        currentlySelectedAgent = agent;
-        Debug.Log("Selected: " + agent.name);
-    }
-
+         currentlySelectedAgent = agent;
+         Debug.Log("Selected: " + agent.name);
+     }
+    */
 
     // ===============================
     // DESTINATION RAYCAST
     // ===============================
-
+    /*
     void HandleRaycast()
     {
         if (currentlySelectedAgent == null) return;
@@ -91,6 +111,11 @@ public class RTSNavCommander : MonoBehaviour
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+            {
+                return; // Skip selection
+            }
+
             Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
             if (Physics.Raycast(ray, out RaycastHit hit))
@@ -108,7 +133,19 @@ public class RTSNavCommander : MonoBehaviour
             }
         }
     }
-
+    */
+    public void HandleNavMeshRay(RaycastHit hit)
+    {
+            if (NavMesh.SamplePosition(hit.point, out NavMeshHit navHit, 2f, NavMesh.AllAreas))
+            {
+                Vector3 roundedPosition = new Vector3(
+                    Mathf.Round(navHit.position.x),
+                    navHit.position.y,
+                    Mathf.Round(navHit.position.z)
+                    );
+                TryCacheMove(currentlySelectedAgent, roundedPosition);
+            }
+    }
 
     // ===============================
     // CACHE MOVES
@@ -178,16 +215,21 @@ public class RTSNavCommander : MonoBehaviour
     // EXECUTE MOVES
     // ===============================
 
+    public void MoveExecuteVar()
+    {
+        MoveExecute = true;
+    }
     void HandleMoveExecution()
     {
-        if (Keyboard.current.mKey.wasPressedThisFrame && queuedMoves.Count > 0)
+        //Keyboard.current.mKey.wasPressedThisFrame
+        if (MoveExecute == true && queuedMoves.Count > 0)
         {
             foreach (var move in queuedMoves)
             {
                 if (move.Key != null)
                     move.Key.SetDestination(move.Value);
             }
-
+            MoveExecute = false;
             ClearTiles();
             ClearAll();
         }
