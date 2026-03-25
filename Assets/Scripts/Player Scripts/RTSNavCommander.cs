@@ -142,7 +142,10 @@ public class RTSNavCommander : MonoBehaviour
 
     public void HandleNavMeshRay(RaycastHit hit)
     {
-        if (currentlySelectedAgent == null) return;
+        if (currentlySelectedAgent == null)
+        {
+            return;
+        }
 
         if (NavMesh.SamplePosition(hit.point, out NavMeshHit navHit, 2f, NavMesh.AllAreas))
         {
