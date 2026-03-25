@@ -28,8 +28,8 @@ public class SelectionManager : MonoBehaviour
         HandleSelection();
         HandleRaycast();
         navCommander.currentlySelectedAgent = currentlySelectedAgent;
-        playerAttack.player = playerObj;
-        playerAttack.target = enemyObj;
+        playerAttack.playerObj = playerObj;
+        playerAttack.attackTarget = enemyObj;
     }
 
     private void HandleSelection()
@@ -73,11 +73,14 @@ public class SelectionManager : MonoBehaviour
             {
                 if (hit.collider.gameObject.tag == "Enemy")
                 {
-                    playerAttack.target = hit.collider.GetComponent<GameObject>();
+                    enemyObj = hit.collider.gameObject;
+                    playerAttack.selections(playerObj, enemyObj);
+                    Debug.Log("Are we getting here?" + enemyObj.name);
                 }
                 else
                 {
                     navCommander.HandleNavMeshRay(hit);
+                    Debug.Log("Sending to NavCommander");
                 }
             }
         }
