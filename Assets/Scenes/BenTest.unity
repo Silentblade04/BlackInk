@@ -654,6 +654,7 @@ GameObject:
   - component: {fileID: 225544912}
   - component: {fileID: 225544911}
   - component: {fileID: 225544910}
+  - component: {fileID: 225544913}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -756,6 +757,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225544908}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!208 &225544913
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225544908}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &292263685
 GameObject:
   m_ObjectHideFlags: 0
@@ -7280,7 +7297,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1627473763}
-  - component: {fileID: 1627473764}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Demolition
@@ -7297,7 +7313,7 @@ Transform:
   m_GameObject: {fileID: 1627473762}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.998, y: 9.903, z: 18.056}
+  m_LocalPosition: {x: 28.998, y: 9.97, z: 18.056}
   m_LocalScale: {x: 1, y: 0.69, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7308,22 +7324,6 @@ Transform:
   - {fileID: 1914018447}
   m_Father: {fileID: 1879856060}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &1627473764
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627473762}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 0.22, y: 1, z: 0.22}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &1635996554
 GameObject:
   m_ObjectHideFlags: 0
