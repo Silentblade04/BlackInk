@@ -9,7 +9,7 @@ public class PlayerStats : ScriptableObject
     public int act { get { return actions; } }
     public int spd { get { return speed; } }
     public int str { get { return strength; } }
-    public float dex { get { return dexterity; } }
+    public int dex { get { return dexterity; } }
     public int precep { get { return preception; } }
     public int chr { get { return charisma; } }
 
@@ -18,7 +18,7 @@ public class PlayerStats : ScriptableObject
     [SerializeField] protected int actions;        //# of actions you can take in a turn
     [SerializeField] protected int speed;      //Amount of tiles you can move in one movement
     [SerializeField] protected int strength; //Dictates things like carry weight
-    [SerializeField] protected float dexterity;   //Dictates things like accuracy
+    [SerializeField] protected int dexterity;   //Dictates things like accuracy
     [SerializeField] protected int preception; //Dictates how close to things like mines you have to be to see them
     [SerializeField] protected int charisma; //Dictates likelyhood of social actions working
 }
