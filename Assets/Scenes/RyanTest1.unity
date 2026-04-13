@@ -182,6 +182,52 @@ MonoBehaviour:
   attackButton: {fileID: 1047476878}
   playerClass: {fileID: 0}
   attackTargetInfo: {fileID: 0}
+--- !u!1 &358273083
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 358273084}
+  - component: {fileID: 358273085}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &358273084
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358273083}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 582878420}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &358273085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358273083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df5765d73fc34443854aad89a6d88d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Instructions
+  instructions: {fileID: 880390357}
+  background: {fileID: 416503518}
 --- !u!1 &378333646
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,6 +452,78 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382560162}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &416503516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 416503517}
+  - component: {fileID: 416503519}
+  - component: {fileID: 416503518}
+  m_Layer: 5
+  m_Name: RawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &416503517
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416503516}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 624295681}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -3.749, y: 165.88625}
+  m_SizeDelta: {x: 1115.1931, y: 588.5523}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &416503518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416503516}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &416503519
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416503516}
+  m_CullTransparentMesh: 1
 --- !u!1 &582878419
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,6 +557,7 @@ Transform:
   - {fileID: 1155614859}
   - {fileID: 1493658529}
   - {fileID: 24426115}
+  - {fileID: 358273084}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &582878421
@@ -468,6 +587,7 @@ GameObject:
   - component: {fileID: 606176749}
   - component: {fileID: 606176748}
   - component: {fileID: 606176747}
+  - component: {fileID: 606176752}
   m_Layer: 0
   m_Name: Character4
   m_TagString: Selectable
@@ -592,6 +712,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &606176752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606176746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3df42c481fca66446b4bf7911c7634a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BaseClass
+  playerStats: {fileID: 11400000, guid: 5064c0caaccc1334da895c0b4fab1bb6, type: 2}
+  weapon1: {fileID: 11400000, guid: 2b183e7b995027949aa9a36df64d8dca, type: 2}
+  weapon2: {fileID: 0}
+  activeWeapon: {fileID: 0}
+  maxHealth: 0
+  currentHealth: 0
+  healthLevel: 0
+  maxActions: 0
+  currentActions: 0
+  actionsLevel: 0
+  speed: 0
+  speedLevel: 0
+  strength: 0
+  strengthLevel: 0
+  dexterity: 0
+  dexterityLevel: 0
+  perception: 0
+  perceptionLevel: 0
+  charisma: 0
+  charismaLevel: 0
+  experiencePoints: 0
+  weaponDamage: 0
+  ammo: 0
+  accuracy: 0
+  armorPiercing: 0
+  burst: 0
+  range: 0
 --- !u!1001 &624295680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -667,6 +826,46 @@ PrefabInstance:
     - target: {fileID: 8024883061283786105, guid: a9b312a2800606249a7aba3734017f05, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PrimeMovement
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080896759229343500, guid: a9b312a2800606249a7aba3734017f05, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080896759229343500, guid: a9b312a2800606249a7aba3734017f05, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080896759229343500, guid: a9b312a2800606249a7aba3734017f05, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080896759229343500, guid: a9b312a2800606249a7aba3734017f05, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 358273085}
+    - target: {fileID: 8080896759229343500, guid: a9b312a2800606249a7aba3734017f05, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080896759229343500, guid: a9b312a2800606249a7aba3734017f05, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080896759229343500, guid: a9b312a2800606249a7aba3734017f05, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: showText
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080896759229343500, guid: a9b312a2800606249a7aba3734017f05, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Instructions, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080896759229343500, guid: a9b312a2800606249a7aba3734017f05, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Instructions, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080896759229343500, guid: a9b312a2800606249a7aba3734017f05, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8638942850821876228, guid: a9b312a2800606249a7aba3734017f05, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -770,9 +969,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 9086604251301517271, guid: a9b312a2800606249a7aba3734017f05, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 416503517}
+    - targetCorrespondingSourceObject: {fileID: 9086604251301517271, guid: a9b312a2800606249a7aba3734017f05, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 880390356}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9b312a2800606249a7aba3734017f05, type: 3}
+--- !u!224 &624295681 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 9086604251301517271, guid: a9b312a2800606249a7aba3734017f05, type: 3}
+  m_PrefabInstance: {fileID: 624295680}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &645985153
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,6 +996,7 @@ GameObject:
   - component: {fileID: 645985156}
   - component: {fileID: 645985155}
   - component: {fileID: 645985154}
+  - component: {fileID: 645985159}
   m_Layer: 0
   m_Name: Character3
   m_TagString: Selectable
@@ -910,6 +1121,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &645985159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645985153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3df42c481fca66446b4bf7911c7634a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BaseClass
+  playerStats: {fileID: 11400000, guid: 5064c0caaccc1334da895c0b4fab1bb6, type: 2}
+  weapon1: {fileID: 11400000, guid: 2b183e7b995027949aa9a36df64d8dca, type: 2}
+  weapon2: {fileID: 0}
+  activeWeapon: {fileID: 0}
+  maxHealth: 0
+  currentHealth: 0
+  healthLevel: 0
+  maxActions: 0
+  currentActions: 0
+  actionsLevel: 0
+  speed: 0
+  speedLevel: 0
+  strength: 0
+  strengthLevel: 0
+  dexterity: 0
+  dexterityLevel: 0
+  perception: 0
+  perceptionLevel: 0
+  charisma: 0
+  charismaLevel: 0
+  experiencePoints: 0
+  weaponDamage: 0
+  ammo: 0
+  accuracy: 0
+  armorPiercing: 0
+  burst: 0
+  range: 0
 --- !u!1 &710797892
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,6 +1433,150 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 783724577}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &880390355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 880390356}
+  - component: {fileID: 880390358}
+  - component: {fileID: 880390357}
+  m_Layer: 5
+  m_Name: Instructions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &880390356
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880390355}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 624295681}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 208}
+  m_SizeDelta: {x: 1107.6704, y: 504.33}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &880390357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880390355}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "Instructions: On the left side of the screen is 5 \"Operator\" buttons.
+    Clicking these or clicking 1-5 on the top of the keyboard will select a soldier.\n\nFor
+    movement, each soldier remembers the last place you told them to move to and
+    will wait until you click \"Execute\" to move. \n\nEach soldier does not remember
+    shooting however, so you need to have soldiers shoot individually the same way
+    that they would move.\n\nLastly there are interactably objects that you can either
+    click I with a soldier next to it, or press the interact button.  \n\nPress the
+    Menue button again to close this."
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: -96.10748}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &880390358
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880390355}
+  m_CullTransparentMesh: 1
 --- !u!114 &1047476878 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9132205084809523269, guid: a9b312a2800606249a7aba3734017f05, type: 3}
@@ -1319,6 +1713,7 @@ GameObject:
   - component: {fileID: 1107226499}
   - component: {fileID: 1107226498}
   - component: {fileID: 1107226497}
+  - component: {fileID: 1107226502}
   m_Layer: 0
   m_Name: Character5
   m_TagString: Selectable
@@ -1443,6 +1838,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1107226502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1107226496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3df42c481fca66446b4bf7911c7634a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BaseClass
+  playerStats: {fileID: 11400000, guid: 5064c0caaccc1334da895c0b4fab1bb6, type: 2}
+  weapon1: {fileID: 11400000, guid: 2b183e7b995027949aa9a36df64d8dca, type: 2}
+  weapon2: {fileID: 0}
+  activeWeapon: {fileID: 0}
+  maxHealth: 0
+  currentHealth: 0
+  healthLevel: 0
+  maxActions: 0
+  currentActions: 0
+  actionsLevel: 0
+  speed: 0
+  speedLevel: 0
+  strength: 0
+  strengthLevel: 0
+  dexterity: 0
+  dexterityLevel: 0
+  perception: 0
+  perceptionLevel: 0
+  charisma: 0
+  charismaLevel: 0
+  experiencePoints: 0
+  weaponDamage: 0
+  ammo: 0
+  accuracy: 0
+  armorPiercing: 0
+  burst: 0
+  range: 0
 --- !u!1 &1155614858
 GameObject:
   m_ObjectHideFlags: 0
@@ -2538,6 +2972,7 @@ GameObject:
   - component: {fileID: 1719538699}
   - component: {fileID: 1719538698}
   - component: {fileID: 1719538697}
+  - component: {fileID: 1719538700}
   - component: {fileID: 1719538696}
   - component: {fileID: 1719538695}
   m_Layer: 0
@@ -2664,6 +3099,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1719538700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719538694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3df42c481fca66446b4bf7911c7634a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BaseClass
+  playerStats: {fileID: 11400000, guid: 5064c0caaccc1334da895c0b4fab1bb6, type: 2}
+  weapon1: {fileID: 11400000, guid: 2b183e7b995027949aa9a36df64d8dca, type: 2}
+  weapon2: {fileID: 0}
+  activeWeapon: {fileID: 0}
+  maxHealth: 0
+  currentHealth: 0
+  healthLevel: 0
+  maxActions: 0
+  currentActions: 0
+  actionsLevel: 0
+  speed: 0
+  speedLevel: 0
+  strength: 0
+  strengthLevel: 0
+  dexterity: 0
+  dexterityLevel: 0
+  perception: 0
+  perceptionLevel: 0
+  charisma: 0
+  charismaLevel: 0
+  experiencePoints: 0
+  weaponDamage: 0
+  ammo: 0
+  accuracy: 0
+  armorPiercing: 0
+  burst: 0
+  range: 0
 --- !u!1 &1747418907
 GameObject:
   m_ObjectHideFlags: 0
