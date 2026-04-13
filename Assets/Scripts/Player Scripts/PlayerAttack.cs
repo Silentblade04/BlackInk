@@ -19,7 +19,6 @@ public class PlayerAttack : MonoBehaviour
 
     //the player GameObject
     public GameObject playerObj = null;
-    [SerializeField] private BasicWeaponObj weaponObj = null;
 
     //Players camera
     [SerializeField] Camera mainCamera;
@@ -33,6 +32,11 @@ public class PlayerAttack : MonoBehaviour
     //attack buttons
     [SerializeField] private Button attackButton;
 
+    //Handles player Base Class interactions
+    [SerializeField] private BaseClass playerClass;
+    [SerializeField] private EnemyBase attackTargetInfo;
+
+    
     private void Awake()
     {
         attackmode = false;
@@ -77,13 +81,15 @@ public class PlayerAttack : MonoBehaviour
     }
     
     //Handles selecting what is shooting/getting shot
-    public void selections(GameObject player, GameObject enemy)
+    public void selections(BaseClass playerInfo, GameObject player, GameObject enemy, EnemyBase enemyInfo)
     {
         Debug.Log("Calling selections");
+        playerClass = playerInfo;
         playerObj = player;
         attackTarget = enemy;
+        attackTargetInfo = enemyInfo;
     }
-
+     
     //Handles attack storing
     private void attackCaching(GameObject player,GameObject enemy)
     {
@@ -108,14 +114,16 @@ public class PlayerAttack : MonoBehaviour
         if (attackExecute == true)
         {
             Debug.Log("Attacked Handler fired");
-            attack(attackTarget, weaponObj, playerObj, 0);
+            attack(attackTargetInfo, attackTarget, playerClass, playerObj);
             attackExecute = false;
         }
     }
 
     //Handles all the attack inner workings
-    private void attack(GameObject target, BasicWeaponObj weapon, GameObject player, int modifiers)
+    private void attack(EnemyBase targetInfo, GameObject target, BaseClass baseClass, GameObject player)
     {
+        targetInfo.takingDamage(baseClass.Damage);
+
         Debug.Log(player + " attacked " + target);
         attackTarget = null;
         playerObj = null;
