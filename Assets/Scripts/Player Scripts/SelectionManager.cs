@@ -12,7 +12,10 @@ public class SelectionManager : MonoBehaviour
     //Character Selection
     [SerializeField] private NavMeshAgent currentlySelectedAgent = null;
     [SerializeField] private GameObject playerObj = null;
+    [SerializeField] private BaseClass playerInformation;
     [SerializeField] private GameObject enemyObj = null;
+    [SerializeField] private EnemyBase enemyInformation;
+
 
     //Manager Refrences
     [SerializeField] private RTSNavCommander navCommander;
@@ -39,8 +42,6 @@ public class SelectionManager : MonoBehaviour
         if (Keyboard.current.digit3Key.wasPressedThisFrame) SelectCharacter(3);
         if (Keyboard.current.digit4Key.wasPressedThisFrame) SelectCharacter(4);
         if (Keyboard.current.digit5Key.wasPressedThisFrame) SelectCharacter(5);
-       
-
     }
 
     public void SelectCharacter(int index)
@@ -52,6 +53,7 @@ public class SelectionManager : MonoBehaviour
         if (agent == null) return;
 
         playerObj = target;
+        playerInformation = playerObj.GetComponent<BaseClass>();
         currentlySelectedAgent = agent;
         Debug.Log("Selected: " + agent.name);
     }
@@ -74,7 +76,8 @@ public class SelectionManager : MonoBehaviour
                 if (hit.collider.gameObject.tag == "Enemy")
                 {
                     enemyObj = hit.collider.gameObject;
-                    playerAttack.selections(playerObj, enemyObj);
+                    enemyInformation = hit.collider.GetComponent<EnemyBase>();
+                    playerAttack.selections(playerInformation, playerObj, enemyObj, enemyInformation);
                     Debug.Log("Are we getting here?" + enemyObj.name);
                 }
                 else
