@@ -15,6 +15,8 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] private BaseClass playerInformation;
     [SerializeField] private GameObject enemyObj = null;
     [SerializeField] private EnemyBase enemyInformation;
+    [SerializeField] private GameObject selectionTilePrefab;
+    private GameObject currentTile;
 
 
     //Manager Refrences
@@ -56,6 +58,23 @@ public class SelectionManager : MonoBehaviour
         playerInformation = playerObj.GetComponent<BaseClass>();
         currentlySelectedAgent = agent;
         Debug.Log("Selected: " + agent.name);
+        // Spawn or move tile under selected character
+        if (currentTile == null)
+        {   
+            currentTile = Instantiate(selectionTilePrefab);
+        }
+        currentTile.transform.position = new Vector3(
+            playerObj.transform.position.x,
+            playerObj.transform.position.y - 1f,
+            playerObj.transform.position.z);
+    }
+    public void ClearSelectionTile()
+    {
+        if (currentTile != null)
+        {
+            Destroy(currentTile);
+            currentTile = null;
+        }
     }
     void HandleRaycast()
     {
@@ -88,4 +107,5 @@ public class SelectionManager : MonoBehaviour
             }
         }
     }
+    
 }
