@@ -49,11 +49,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 2.25, y: 2.5, z: 4.5}
+  m_Extents: {x: 2.25, y: 2.5, z: 4.67}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 2, z: 1}
+  m_Center: {x: 0, y: 1.9, z: 1}
   m_TimeToStationary: 0.5
 --- !u!1 &603419053420074262
 GameObject:
@@ -290,7 +290,6 @@ GameObject:
   - component: {fileID: 2226911259059720339}
   - component: {fileID: 8947710615761386122}
   - component: {fileID: 5163629457229280204}
-  - component: {fileID: 354210533320057895}
   m_Layer: 0
   m_Name: Cylinder (2)
   m_TagString: Untagged
@@ -370,29 +369,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &354210533320057895
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5952652628124528127}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &6635061808445788796
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +380,6 @@ GameObject:
   - component: {fileID: 2802806706285283131}
   - component: {fileID: 689139201643650255}
   - component: {fileID: 7540488226044214887}
-  - component: {fileID: 3024626266400223748}
   m_Layer: 0
   m_Name: Cylinder (3)
   m_TagString: Untagged
@@ -484,29 +459,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &3024626266400223748
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6635061808445788796}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &7989424505406953762
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,7 +470,6 @@ GameObject:
   - component: {fileID: 1515637155232515798}
   - component: {fileID: 689406330399692670}
   - component: {fileID: 8378906472946848099}
-  - component: {fileID: 3836546508984487303}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -598,29 +549,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &3836546508984487303
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7989424505406953762}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &8035075313171804151
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,7 +672,6 @@ GameObject:
   - component: {fileID: 1946367039611904665}
   - component: {fileID: 3483672161495379054}
   - component: {fileID: 3441766501941800814}
-  - component: {fileID: 528405730899255470}
   m_Layer: 0
   m_Name: Cylinder (1)
   m_TagString: Untagged
@@ -824,26 +751,3 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &528405730899255470
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8555461291693309247}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
