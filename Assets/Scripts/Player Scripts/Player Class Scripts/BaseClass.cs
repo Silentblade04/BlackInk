@@ -12,56 +12,57 @@ public class BaseClass : MonoBehaviour
 
 
     [Header("Scriptable Objects")]
-    [SerializeField] private PlayerStats playerStats;
-    [SerializeField] private BasicWeaponObj weapon1 = null;
-    [SerializeField] private BasicWeaponObj weapon2 = null;
-    [SerializeField] private BasicWeaponObj activeWeapon = null;
+    [SerializeField] protected PlayerStats playerStats;
+    [SerializeField] protected BasicWeaponObj weapon1 = null;
+    [SerializeField] protected BasicWeaponObj weapon2 = null;
+    [SerializeField] protected BasicWeaponObj activeWeapon = null;
     [Header("Health")]
     //Health Based Stats
-    [SerializeField] private int maxHealth;
-    [SerializeField] private int currentHealth;
-    [SerializeField] private int healthLevel = 0;
+    [SerializeField] protected int maxHealth;
+    [SerializeField] protected int currentHealth;
+    [SerializeField] protected int healthLevel = 0;
 
     [Header("Action Points")]
     //Action Based Stats
-    [SerializeField] private int maxActions;
-    [SerializeField] private int currentActions;
-    [SerializeField] private int actionsLevel = 0;
+    [SerializeField] protected int maxActions;
+    [SerializeField] protected int currentActions;
+    [SerializeField] protected int actionsLevel = 0;
 
     [Header("Speed")]
     //Speed Based Stats
-    [SerializeField] private int speed;
-    [SerializeField] private int speedLevel = 0;
+    [SerializeField] protected int speed;
+    [SerializeField] protected int speedLevel = 0;
 
     [Header("Player Attributes")]
     //Strength Based Stats
-    [SerializeField] private int strength;
-    [SerializeField] private int strengthLevel = 0;
+    [SerializeField] protected int strength;
+    [SerializeField] protected int strengthLevel = 0;
 
     //Dexterity Based Stats
-    [SerializeField] private int dexterity;
-    [SerializeField] private int dexterityLevel = 0;
+    [SerializeField] protected int dexterity;
+    [SerializeField] protected int dexterityLevel = 0;
 
     //Perception Based Stats
-    [SerializeField] private int perception;
-    [SerializeField] private int perceptionLevel = 0;
+    [SerializeField] protected int perception;
+    [SerializeField] protected int perceptionLevel = 0;
+    [SerializeField] protected float sightRange;
 
     //Charisma based Stats
-    [SerializeField] private int charisma;
-    [SerializeField] private int charismaLevel = 0;
+    [SerializeField] protected int charisma;
+    [SerializeField] protected int charismaLevel = 0;
 
     [Header("Level Up Stuff")]
-    [SerializeField] private float experiencePoints;
+    [SerializeField] protected float experiencePoints;
 
     [Header("Weapon Stuff")]
-    [SerializeField] private int weaponDamage;
-    [SerializeField] private int ammo;
-    [SerializeField] private float accuracy;
-    [SerializeField] private int armorPiercing;
-    [SerializeField] private int burst;
-    [SerializeField] private int range;
+    [SerializeField] protected int weaponDamage;
+    [SerializeField] protected int ammo;
+    [SerializeField] protected float accuracy;
+    [SerializeField] protected int armorPiercing;
+    [SerializeField] protected int burst;
+    [SerializeField] protected int range;
 
-    private void Start()
+    protected void Start()
     {
         //Setting the player levels to their base
         healthLevel = playerStats.hp;
@@ -81,9 +82,12 @@ public class BaseClass : MonoBehaviour
         currentHealth = maxHealth;
         currentActions = maxActions;
         activeWeapon = weapon1;
+
+        //sets attribute based stats
+        sightRange = perceptionLevel * 10;
     }
 
-    private void Update()
+    protected void Update()
     {
         weaponDamage = activeWeapon.Damage;
         ammo = activeWeapon.Ammunition;
@@ -91,6 +95,8 @@ public class BaseClass : MonoBehaviour
         armorPiercing = activeWeapon.ArmorPiercing;
         burst = activeWeapon.Burst;
         range = activeWeapon.Range;
+
+        lineOfSight();
     }
 
     //Deals with the player taking damage
@@ -105,7 +111,7 @@ public class BaseClass : MonoBehaviour
     }
 
     //Deals with any changes in player health
-    private void healthChange(int amount)
+    protected void healthChange(int amount)
     {
         currentHealth = currentHealth + amount;
         if (currentHealth >  maxHealth)
@@ -118,7 +124,28 @@ public class BaseClass : MonoBehaviour
         }
     }
 
-    private void death()
+    protected void lineOfSight()
+    {
+        Collider[] losCollision= Physics.OverlapSphere(gameObject.transform.position, sightRange);
+        foreach (var collision in losCollision)
+        {
+            if (collision.gameObject.TryGetComponent<EnemyBase>(out EnemyBase hitenemy))
+            {
+                //Debug.DrawRay(gameObject.transform.position, (collision.transform.position - transform.position), Color.red, 1f);
+                if (Physics.Raycast(gameObject.transform.position, (collision.transform.position - transform.position), out RaycastHit hit))
+                {
+                    Debug.DrawLine(transform.position, hit.point, Color.yellow);
+                    if (hit.collider.CompareTag("Enemy"))
+                    {
+                        hit.collider.GetComponent<EnemyBase>().seen = true;
+                    }
+                }
+            }
+        }
+
+    }
+
+    protected void death()
     {
         maxHealth = 0;
         currentHealth = 0;

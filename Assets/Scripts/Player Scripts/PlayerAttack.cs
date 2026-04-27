@@ -36,7 +36,14 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private BaseClass playerClass;
     [SerializeField] private EnemyBase attackTargetInfo;
 
-    
+    //Log refrence
+    [SerializeField] private Log log;
+
+    //Chacheing Attacks
+    private Dictionary<BaseClass, EnemyBase> queuedAttacks = new Dictionary<BaseClass, EnemyBase>();
+
+
+
     private void Awake()
     {
         attackmode = false;
@@ -84,20 +91,20 @@ public class PlayerAttack : MonoBehaviour
     public void selections(BaseClass playerInfo, GameObject player, GameObject enemy, EnemyBase enemyInfo)
     {
         Debug.Log("Calling selections");
-        playerClass = playerInfo;
+        attackCaching(playerInfo, enemyInfo);
         playerObj = player;
         attackTarget = enemy;
-        attackTargetInfo = enemyInfo;
     }
      
     //Handles attack storing
-    private void attackCaching(GameObject player,GameObject enemy)
+    private void attackCaching(BaseClass player,EnemyBase enemy)
     {
         if (player == null || enemy == null)
         {
             Debug.Log(player == null || enemy == null);
             return;
         }
+        queuedAttacks[player] = enemy;
 
     }
 
@@ -114,7 +121,10 @@ public class PlayerAttack : MonoBehaviour
         if (attackExecute == true)
         {
             Debug.Log("Attacked Handler fired");
-            attack(attackTargetInfo, attackTarget, playerClass, playerObj);
+            foreach (KeyValuePair<BaseClass, EnemyBase> entry in queuedAttacks)
+            {
+                attack(entry.Value, attackTarget, entry.Key, playerObj);
+            }
             attackExecute = false;
         }
     }
@@ -122,6 +132,7 @@ public class PlayerAttack : MonoBehaviour
     //Handles all the attack inner workings
     private void attack(EnemyBase targetInfo, GameObject target, BaseClass baseClass, GameObject player)
     {
+        log.handleLog("attack");
         targetInfo.takingDamage(baseClass.Damage);
 
         Debug.Log(player + " attacked " + target);
