@@ -46,6 +46,10 @@ public class EnemyBase : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log("Killed this one");
+            if (gameObject == null)
+            {
+                return;
+            }
             Destroy(gameObject);
         }
     }

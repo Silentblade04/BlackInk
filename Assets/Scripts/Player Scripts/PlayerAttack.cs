@@ -37,7 +37,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private EnemyBase attackTargetInfo;
 
     //Log refrence
-    [SerializeField] private Log log;
+    //[SerializeField] private Log log;
 
     //Chacheing Attacks
     private Dictionary<BaseClass, EnemyBase> queuedAttacks = new Dictionary<BaseClass, EnemyBase>();
@@ -123,19 +123,29 @@ public class PlayerAttack : MonoBehaviour
             Debug.Log("Attacked Handler fired");
             foreach (KeyValuePair<BaseClass, EnemyBase> entry in queuedAttacks)
             {
-                attack(entry.Value, attackTarget, entry.Key, playerObj);
+                if (entry.Key == null)
+                {
+                    Debug.Log("This enemy is already dead");
+                    return;
+                }
+                attack(entry.Value, entry.Key);
             }
             attackExecute = false;
         }
     }
 
     //Handles all the attack inner workings
-    private void attack(EnemyBase targetInfo, GameObject target, BaseClass baseClass, GameObject player)
+    private void attack(EnemyBase targetInfo, BaseClass baseClass)
     {
-        log.handleLog("attack");
+        //log.handleLog("attack");
+        if (targetInfo == null)
+        {
+            Debug.Log("Base Class Null");
+            return;
+        }
         targetInfo.takingDamage(baseClass.Damage);
 
-        Debug.Log(player + " attacked " + target);
+        Debug.Log(" Player attacked target");
         attackTarget = null;
         playerObj = null;
     }
