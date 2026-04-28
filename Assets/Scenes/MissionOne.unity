@@ -291,12 +291,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 44333507}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.25645494, y: 0.65896195, z: 0.25645494, w: 0.65896195}
-  m_LocalPosition: {x: 65.67, y: 3.04, z: 66.377}
-  m_LocalScale: {x: 0.5, y: 1.5, z: 0.5}
+  m_LocalRotation: {x: -0.36268207, y: -0, z: -0, w: 0.931913}
+  m_LocalPosition: {x: -0.3769989, y: 0.40999985, z: -0.380005}
+  m_LocalScale: {x: 0.49999994, y: 1.4999998, z: 0.49999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1310298655}
+  m_Father: {fileID: 1833497794}
   m_LocalEulerAnglesHint: {x: -42.53, y: 90, z: 0}
 --- !u!65 &44333509
 BoxCollider:
@@ -890,6 +890,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
   health: 0
+  seen: 0
+  allwaysSeen: 0
 --- !u!136 &143170001
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1711,6 +1713,38 @@ Transform:
   - {fileID: 2070808571}
   m_Father: {fileID: 133941705}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &374199261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 374199262}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &374199262
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374199261}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -56.187, y: 11.741, z: 78.26}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2090735279}
+  m_Father: {fileID: 1529204160}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &378333646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,6 +2407,7 @@ MonoBehaviour:
   attackButton: {fileID: 65925040}
   playerClass: {fileID: 0}
   attackTargetInfo: {fileID: 0}
+  log: {fileID: 0}
 --- !u!1 &517846366
 GameObject:
   m_ObjectHideFlags: 0
@@ -2923,6 +2958,7 @@ MonoBehaviour:
   dexterityLevel: 0
   perception: 0
   perceptionLevel: 0
+  sightRange: 0
   charisma: 0
   charismaLevel: 0
   experiencePoints: 0
@@ -3352,6 +3388,7 @@ MonoBehaviour:
   dexterityLevel: 0
   perception: 0
   perceptionLevel: 0
+  sightRange: 0
   charisma: 0
   charismaLevel: 0
   experiencePoints: 0
@@ -3538,6 +3575,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
   health: 0
+  seen: 0
+  allwaysSeen: 0
 --- !u!136 &705165320
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5925,6 +5964,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
   health: 0
+  seen: 0
+  allwaysSeen: 0
 --- !u!208 &902902032
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -7774,6 +7815,7 @@ MonoBehaviour:
   dexterityLevel: 0
   perception: 0
   perceptionLevel: 0
+  sightRange: 0
   charisma: 0
   charismaLevel: 0
   experiencePoints: 0
@@ -8893,6 +8935,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
   health: 0
+  seen: 0
+  allwaysSeen: 1
 --- !u!208 &1216742554
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -9459,6 +9503,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
   health: 0
+  seen: 0
+  allwaysSeen: 0
 --- !u!136 &1254009661
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9688,6 +9734,9 @@ MonoBehaviour:
   puzzleController: {fileID: 138197403}
   isLeverA: 0
   interactKey: 105
+  leverHandle: {fileID: 1833497794}
+  rotateAngle: -60
+  rotateSpeed: 4
 --- !u!1 &1261927733
 GameObject:
   m_ObjectHideFlags: 0
@@ -9929,6 +9978,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
   health: 0
+  seen: 0
+  allwaysSeen: 0
 --- !u!136 &1265894964
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10039,13 +10090,13 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1637324478}
-  - {fileID: 44333508}
   - {fileID: 1683338014}
   - {fileID: 1996102147}
   - {fileID: 517846367}
   - {fileID: 181254595}
   - {fileID: 1395863486}
   - {fileID: 1254402249}
+  - {fileID: 1833497794}
   m_Father: {fileID: 1417869392}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1326833439 stripped
@@ -11344,6 +11395,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
   health: 0
+  seen: 0
+  allwaysSeen: 0
 --- !u!136 &1444432279
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -11573,6 +11626,9 @@ MonoBehaviour:
   puzzleController: {fileID: 138197403}
   isLeverA: 1
   interactKey: 105
+  leverHandle: {fileID: 374199262}
+  rotateAngle: -60
+  rotateSpeed: 4
 --- !u!1001 &1483156876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12023,7 +12079,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1516036341}
-  - component: {fileID: 1516036342}
   - component: {fileID: 1516036343}
   m_Layer: 0
   m_Name: Barrel
@@ -12052,19 +12107,6 @@ Transform:
   - {fileID: 1151396258}
   m_Father: {fileID: 953179716}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1516036342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516036340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80c0533661ef7eb4eb31d1b09f8dd4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
-  health: 0
 --- !u!136 &1516036343
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -12364,7 +12406,7 @@ Transform:
   - {fileID: 56394959}
   - {fileID: 1067546272}
   - {fileID: 1150818501}
-  - {fileID: 2090735279}
+  - {fileID: 374199262}
   - {fileID: 1171422754}
   - {fileID: 1454010338}
   m_Father: {fileID: 1417869392}
@@ -13101,7 +13143,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1627473763}
-  - component: {fileID: 1627473765}
   - component: {fileID: 1627473764}
   m_Layer: 0
   m_Name: Barrel
@@ -13156,19 +13197,6 @@ CapsuleCollider:
   m_Height: 5
   m_Direction: 1
   m_Center: {x: 0, y: 0.61, z: 0}
---- !u!114 &1627473765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627473762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80c0533661ef7eb4eb31d1b09f8dd4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
-  health: 0
 --- !u!1001 &1634976153
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13646,6 +13674,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
   health: 0
+  seen: 0
+  allwaysSeen: 0
 --- !u!136 &1677000998
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -14162,6 +14192,7 @@ MonoBehaviour:
   dexterityLevel: 0
   perception: 0
   perceptionLevel: 0
+  sightRange: 0
   charisma: 0
   charismaLevel: 0
   experiencePoints: 0
@@ -14367,6 +14398,7 @@ MonoBehaviour:
   dexterityLevel: 0
   perception: 0
   perceptionLevel: 0
+  sightRange: 0
   charisma: 0
   charismaLevel: 0
   experiencePoints: 0
@@ -15177,6 +15209,38 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1819422810}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1833497793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1833497794}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1833497794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833497793}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 66.05, y: 2.63, z: 66}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 44333508}
+  m_Father: {fileID: 1310298655}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1869856910
 GameObject:
   m_ObjectHideFlags: 0
@@ -16014,6 +16078,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
   health: 0
+  seen: 0
+  allwaysSeen: 0
 --- !u!136 &2001049994
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -16734,12 +16800,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090735278}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.3477541, y: 0, z: 0, w: 0.93758583}
-  m_LocalPosition: {x: -56.17, y: 11.909, z: 78.020996}
+  m_LocalRotation: {x: -0.3477541, y: -0, z: -0, w: 0.93758583}
+  m_LocalPosition: {x: 0.017002106, y: 0.20600033, z: -0.2890091}
   m_LocalScale: {x: 0.2, y: 1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1529204160}
+  m_Father: {fileID: 374199262}
   m_LocalEulerAnglesHint: {x: -40.7, y: 0, z: 0}
 --- !u!65 &2090735280
 BoxCollider:

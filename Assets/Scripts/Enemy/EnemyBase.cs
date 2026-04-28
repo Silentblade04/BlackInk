@@ -5,6 +5,7 @@ public class EnemyBase : MonoBehaviour
 {
     [SerializeField] protected int health = 0;
     [SerializeField] public bool seen;
+    [SerializeField] public bool allwaysSeen;
 
     protected void Start()
     {
@@ -13,6 +14,10 @@ public class EnemyBase : MonoBehaviour
     }
     protected void Update()
     {
+        if (allwaysSeen)
+        {
+            seen = true;
+        }
         if (seen == false)
         {
             //hiding code

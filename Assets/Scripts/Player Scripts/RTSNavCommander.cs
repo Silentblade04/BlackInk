@@ -18,7 +18,7 @@ public class RTSNavCommander : MonoBehaviour
     public int maxMoveDistance = 15;
 
     // Movement state
-    private bool MovingPrimed = false;
+    private bool MovingPrimed = true;
 
     // Movement Execution variable
     private bool MoveExecute = false;

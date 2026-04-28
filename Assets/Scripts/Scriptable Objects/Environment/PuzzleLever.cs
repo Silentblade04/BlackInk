@@ -9,17 +9,50 @@ public class PuzzleLever : MonoBehaviour
     [Header("Interaction")]
     [SerializeField] private KeyCode interactKey = KeyCode.I;
 
+    [Header("Lever Rotation")]
+    [SerializeField] private Transform leverHandle; // Assign the part that rotates
+    [SerializeField] private float rotateAngle = -45f;
+    [SerializeField] private float rotateSpeed = 4f;
+
     private bool hasActivated = false;
+    private bool isRotating = false;
+
     private int objectsInside = 0;
+
+    private Quaternion startRotation;
+    private Quaternion targetRotation;
+
+    private void Start()
+    {
+        if (leverHandle != null)
+        {
+            startRotation = leverHandle.localRotation;
+            targetRotation = startRotation * Quaternion.Euler(rotateAngle, 0f, 0f);
+        }
+    }
 
     private void Update()
     {
-        // Only allow interaction if:
-        // - Not already used
-        // - A valid object is inside trigger
+        // Interaction check
         if (!hasActivated && objectsInside > 0 && Input.GetKeyDown(interactKey))
         {
             ActivateLever();
+        }
+
+        // Handle smooth rotation
+        if (isRotating && leverHandle != null)
+        {
+            leverHandle.localRotation = Quaternion.Slerp(
+                leverHandle.localRotation,
+                targetRotation,
+                Time.deltaTime * rotateSpeed
+            );
+
+            if (Quaternion.Angle(leverHandle.localRotation, targetRotation) < 0.5f)
+            {
+                leverHandle.localRotation = targetRotation;
+                isRotating = false;
+            }
         }
     }
 
@@ -32,7 +65,15 @@ public class PuzzleLever : MonoBehaviour
         else
             puzzleController.ActivateLeverB();
 
-        // Optional: animation / feedback here
+        StartRotation();
+    }
+
+    private void StartRotation()
+    {
+        if (leverHandle != null)
+        {
+            isRotating = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
