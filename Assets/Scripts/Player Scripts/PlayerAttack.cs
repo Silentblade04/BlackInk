@@ -40,7 +40,7 @@ public class PlayerAttack : MonoBehaviour
     //[SerializeField] private Log log;
 
     //Chacheing Attacks
-    private Dictionary<BaseClass, EnemyBase> queuedAttacks = new Dictionary<BaseClass, EnemyBase>();
+    [SerializeField] private Dictionary<BaseClass, EnemyBase> queuedAttacks = new Dictionary<BaseClass, EnemyBase>();
 
 
 
@@ -131,6 +131,7 @@ public class PlayerAttack : MonoBehaviour
                 attack(entry.Value, entry.Key);
             }
             attackExecute = false;
+            clearAtacks();
         }
     }
 
@@ -148,6 +149,11 @@ public class PlayerAttack : MonoBehaviour
         Debug.Log(" Player attacked target");
         attackTarget = null;
         playerObj = null;
+    }
+
+    private void clearAtacks()
+    {
+        queuedAttacks.Clear();
     }
     
 }

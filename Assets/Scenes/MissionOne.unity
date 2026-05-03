@@ -2407,7 +2407,6 @@ MonoBehaviour:
   attackButton: {fileID: 65925040}
   playerClass: {fileID: 0}
   attackTargetInfo: {fileID: 0}
-  log: {fileID: 0}
 --- !u!1 &517846366
 GameObject:
   m_ObjectHideFlags: 0
