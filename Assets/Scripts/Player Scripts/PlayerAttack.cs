@@ -144,15 +144,35 @@ public class PlayerAttack : MonoBehaviour
             Debug.Log("Base Class Null");
             return;
         }
-        targetInfo.takingDamage(baseClass.Damage);
+
+
+        if (Physics.Raycast(baseClass.transform.position, (targetInfo.transform.position - baseClass.transform.position).normalized, out RaycastHit hit, baseClass.Range))
+        {
+            Debug.DrawLine(transform.position, hit.point, Color.yellow);
+            if (hit.collider.CompareTag("Enemy"))
+            {
+                targetInfo.takingDamage(baseClass.Damage);
+
+                Debug.Log(" Player attacked target");
+                attackTarget = null;
+                playerObj = null;
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        /*targetInfo.takingDamage(baseClass.Damage);
 
         Debug.Log(" Player attacked target");
         attackTarget = null;
-        playerObj = null;
+        playerObj = null;*/
     }
 
     private void clearAtacks()
     {
+        Debug.Log("Clearing Attacks");
         queuedAttacks.Clear();
     }
     
