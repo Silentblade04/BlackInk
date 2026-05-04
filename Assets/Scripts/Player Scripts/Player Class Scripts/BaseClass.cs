@@ -131,7 +131,7 @@ public class BaseClass : MonoBehaviour
         {
             if (collision.gameObject.TryGetComponent<EnemyBase>(out EnemyBase hitenemy))
             {
-                //Debug.DrawRay(gameObject.transform.position, (collision.transform.position - transform.position), Color.red, 1f);
+                Debug.DrawRay(gameObject.transform.position, (collision.transform.position - transform.position), Color.red, 1f);
                 if (Physics.Raycast(gameObject.transform.position, (collision.transform.position - transform.position), out RaycastHit hit))
                 {
                     //Debug.DrawLine(transform.position, hit.point, Color.yellow);
