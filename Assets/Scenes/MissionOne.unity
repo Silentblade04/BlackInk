@@ -1987,7 +1987,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1831043390442866628, guid: 0cb83ad2ac689a94fb05b7d5bcb8172b, type: 3}
       propertyPath: m_text
-      value: Execute M
+      value: Execute Move
+      objectReference: {fileID: 0}
+    - target: {fileID: 1831043390442866628, guid: 0cb83ad2ac689a94fb05b7d5bcb8172b, type: 3}
+      propertyPath: m_fontSize
+      value: 33.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1831043390442866628, guid: 0cb83ad2ac689a94fb05b7d5bcb8172b, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1831043390442866628, guid: 0cb83ad2ac689a94fb05b7d5bcb8172b, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2468798618746761606, guid: 0cb83ad2ac689a94fb05b7d5bcb8172b, type: 3}
       propertyPath: m_Pivot.x
@@ -2111,7 +2123,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6654295992818679057, guid: 0cb83ad2ac689a94fb05b7d5bcb8172b, type: 3}
       propertyPath: m_text
-      value: Execute A
+      value: Execute Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 6654295992818679057, guid: 0cb83ad2ac689a94fb05b7d5bcb8172b, type: 3}
+      propertyPath: m_fontSize
+      value: 33.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6654295992818679057, guid: 0cb83ad2ac689a94fb05b7d5bcb8172b, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6654295992818679057, guid: 0cb83ad2ac689a94fb05b7d5bcb8172b, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7380099835406112444, guid: 0cb83ad2ac689a94fb05b7d5bcb8172b, type: 3}
       propertyPath: m_Name
@@ -3787,13 +3811,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710797892}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.36024103, y: 0, z: 0, w: 0.93285924}
+  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
   m_LocalPosition: {x: 0, y: 20, z: -52.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 42.23, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
 --- !u!114 &710797897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11829,6 +11853,7 @@ MonoBehaviour:
   mainCamera: {fileID: 710797895}
   currentlySelectedAgent: {fileID: 0}
   maxMoveDistance: 30
+  MovingPrimed: 0
   moveButton: {fileID: 1620477336}
 --- !u!4 &1493658529
 Transform:

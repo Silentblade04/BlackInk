@@ -18,7 +18,7 @@ public class RTSNavCommander : MonoBehaviour
     public int maxMoveDistance = 15;
 
     // Movement state
-    private bool MovingPrimed = true;
+    [SerializeField] private bool MovingPrimed = true;
 
     // Movement Execution variable
     private bool MoveExecute = false;
@@ -76,6 +76,11 @@ public class RTSNavCommander : MonoBehaviour
             MovingPrimed = false;
             Debug.Log("Moving Deprimed.");
         }
+    }
+
+    public bool IsMovementPrimed()
+    {
+        return MovingPrimed;
     }
 
     // ===============================
@@ -142,6 +147,8 @@ public class RTSNavCommander : MonoBehaviour
 
     public void HandleNavMeshRay(RaycastHit hit)
     {
+        if (!MovingPrimed) return; 
+
         if (currentlySelectedAgent == null)
         {
             return;

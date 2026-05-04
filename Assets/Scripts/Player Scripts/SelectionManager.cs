@@ -54,6 +54,11 @@ public class SelectionManager : MonoBehaviour
         NavMeshAgent agent = target.GetComponent<NavMeshAgent>();
         if (agent == null) return;
 
+        if (currentlySelectedAgent == agent)
+        {
+            FocusCameraOnTarget(target);
+            return;
+        }
         playerObj = target;
         playerInformation = playerObj.GetComponent<BaseClass>();
         currentlySelectedAgent = agent;
@@ -67,6 +72,28 @@ public class SelectionManager : MonoBehaviour
             playerObj.transform.position.x,
             playerObj.transform.position.y - 1f,
             playerObj.transform.position.z);
+    }
+
+    void FocusCameraOnTarget(GameObject target)
+    {
+        Vector3 offset = new Vector3(0, 20, -20);
+        mainCamera.transform.position = target.transform.position + offset;
+
+        Vector3 direction = target.transform.position - mainCamera.transform.position;
+        direction.y = 0f;
+
+        if (direction != Vector3.zero)
+        {
+            float targetYRotation = Quaternion.LookRotation(direction).eulerAngles.y;
+
+            // Keep X and Z rotation, only change Y
+            Vector3 currentEuler = mainCamera.transform.rotation.eulerAngles;
+            mainCamera.transform.rotation = Quaternion.Euler(
+                currentEuler.x,
+                targetYRotation,
+                currentEuler.z
+            );
+        }
     }
     public void ClearSelectionTile()
     {
@@ -101,8 +128,12 @@ public class SelectionManager : MonoBehaviour
                 }
                 else
                 {
-                    navCommander.HandleNavMeshRay(hit);
-                    Debug.Log("Sending to NavCommander");
+                    if (navCommander.IsMovementPrimed())
+                    {
+                        navCommander.HandleNavMeshRay(hit);
+                        Debug.Log("Sending to NavCommander");
+                    }
+                    
                 }
             }
         }
