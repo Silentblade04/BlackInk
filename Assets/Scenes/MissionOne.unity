@@ -2125,6 +2125,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SelectCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 5866926559997749137, guid: 0cb83ad2ac689a94fb05b7d5bcb8172b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c705fe9b11a85bb40948e4091042c0e7, type: 2}
+    - target: {fileID: 5866926559997749137, guid: 0cb83ad2ac689a94fb05b7d5bcb8172b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3391128942550907942, guid: c705fe9b11a85bb40948e4091042c0e7, type: 2}
+    - target: {fileID: 5866926559997749137, guid: 0cb83ad2ac689a94fb05b7d5bcb8172b, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6654295992818679057, guid: 0cb83ad2ac689a94fb05b7d5bcb8172b, type: 3}
       propertyPath: m_text
       value: Execute Attack
